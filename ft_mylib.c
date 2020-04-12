@@ -1,12 +1,35 @@
 #include "ft_turtles.h"
 
-int		ft_strlen(char *str)
+void	ft_putstr(char *str)
 {
 	int		i;
+	char	c;
 
 	i = 0;
 	while (str[i])
+	{
+		c = str[i];
+		write(1, &c, 1);
 		i++;
-	return (i);
+	}
 }
 
+int		ft_atoi(char *str)
+{
+	int		i;
+	int		num;
+
+	i = 0;
+	num = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = num * 10 + (str[i] - '0');
+		i++;
+	}
+	return (num);
+}
+
+int		ft_getadr(int i, int j, int size)
+{
+	return ((i - 1) * size + j);
+}
