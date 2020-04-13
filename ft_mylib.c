@@ -28,8 +28,3 @@ int		ft_atoi(char *str)
 	}
 	return (num);
 }
-
-int		ft_getadr(int i, int j, int size)
-{
-	return ((i - 1) * size + j);
-}

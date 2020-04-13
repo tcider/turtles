@@ -14,7 +14,7 @@ int		ft_n_words(char *str, char space)
 		if (str[i] != space)
 		{
 			if (spaceflag == 0)
-				counter ++;
+				counter++;
 			spaceflag = 1;
 		}
 		else
@@ -50,7 +50,7 @@ char	**ft_split_words(char *s, char space)
 
 	i = 0;
 	k = 0;
-	p = (char **)malloc(sizeof(char*) * (ft_n_words(s, space) + 1));
+	p = (char**)malloc(sizeof(char*) * (ft_n_words(s, space) + 1));
 	while (i < ft_n_words(s, space))
 	{
 		p[i] = (char*)malloc(sizeof(char) * (ft_l_word(&s[k], space) + 1));

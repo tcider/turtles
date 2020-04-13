@@ -68,7 +68,7 @@ int		ft_checkargv(int argc, char **argv, int size)
 	char	**brgv;
 	char	**crgv;
 
-	if (argc == 1 ||argc > 11)
+	if (argc == 1 || argc > 11)
 		return (2);
 	i = 0;
 	while (argv[++i])

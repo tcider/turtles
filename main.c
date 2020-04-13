@@ -21,15 +21,29 @@ void	ft_errors(int err)
 
 int		main(int argc, char **argv)
 {
-	t_turtle	**turtle;
+	int			i;
+	int			n;
+	t_turtle	**trtl;
 
-	ft_errors(ft_checkargv(argc, argv, 30));
-	turtle = ft_maketurtles(argc, argv, 30);
-	
-	ft_putstr("All good");
-
+	ft_errors(ft_checkargv(argc, argv, SIZE));
+	trtl = ft_maketurtles(argc, argv);
+	n = -1;
+	while (++n < MAX_MOVE)
+	{
+		i = 0;
+		while (trtl[i])
+		{
+			trtl[i] = ft_makemove(trtl[i], SIZE);
+			if (trtl[i]->y == SIZE / 2 && trtl[i]->x == SIZE / 2)
+			{
+				ft_putstr("The winner is ");
+				ft_putstr(trtl[i]->name);
+				ft_putstr(".\n");
+				return (0);
+			}
+			i++;
+		}
+	}
+	ft_putstr("Unfortunately, there is no winner:(\n");
 	return (0);
-
-
-
 }

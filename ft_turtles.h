@@ -3,28 +3,26 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-//
-# include <stdio.h>
+
+# define MAX_MOVE 1000
+# define SIZE 30
 
 typedef struct		s_turtle
 {
-	int		adr;
+	int		y;
+	int		x;
 	char	*name;
 	char	*stack;
-	char	direction;
+	int		dir;
 }					t_turtle;
-//
-int			ft_strlen(char *str);
+
 void		ft_putstr(char *str);
 int			ft_atoi(char *str);
-int			ft_getadr(int i, int j, int size);
 int			ft_n_words(char *str, char space);
 char		**ft_split_words(char *s, char space);
 int			ft_checkargv(int argc, char **argv, int size);
 void		ft_errors(int err);
-t_turtle	**ft_maketurtles(int argc, char **argv, int size);
-
-
-
+t_turtle	**ft_maketurtles(int argc, char **argv);
+t_turtle	*ft_makemove(t_turtle *trtl, int size);
 
 #endif
