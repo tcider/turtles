@@ -7,19 +7,20 @@ t_turtle	**ft_maketurtles(int argc, char **argv, int flags)
 	char		**crgv;
 	t_turtle	**all;
 
-	all = (t_turtle**)malloc(sizeof(t_turtle*) * (argc - 2 * flags));
+	all = (t_turtle**)malloc(sizeof(t_turtle*) * (argc - flags));
 	i = 0;
-	flags = 2 * flags + 1;
-	while (argv[flags + i])
+	while (argv[flags + 1 + i])
 	{
 		all[i] = (t_turtle*)malloc(sizeof(t_turtle));
-		brgv = ft_split_words(argv[flags + i], '-');
+		brgv = ft_split_words(argv[flags + 1 + i], '-');
 		crgv = ft_split_words(brgv[0], ':');
 		all[i]->y = ft_atoi(crgv[0]);
 		all[i]->x = ft_atoi(crgv[1]);
 		all[i]->name = brgv[2];
 		all[i]->stack = brgv[1];
 		all[i]->dir = 0;
+		all[i]->sp = 0;
+		all[i]->knock = 0;
 		i++;
 	}
 	all[i] = NULL;
@@ -54,7 +55,7 @@ t_turtle	*ft_go(t_turtle *trtl, int maxy, int maxx)
 	else if (trtl->y == 0)
 		trtl->y = maxy;
 	if (trtl->x == maxx + 1)
-		trtl->x = maxx;
+		trtl->x = 1;
 	else if (trtl->x == 0)
 		trtl->x = maxx;
 	return (trtl);
@@ -65,6 +66,11 @@ t_turtle	*ft_makemove(t_turtle *trtl, t_arena arena)
 	int			i;
 	char		*com;
 
+	if (trtl->knock == 1)
+	{
+		trtl->knock = 0;
+		return (trtl);
+	}
 	i = 0;
 	com = trtl->stack;
 	while (com[i])

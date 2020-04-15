@@ -70,7 +70,7 @@ int		ft_checkargv(int argc, char **argv, t_arena arena)
 
 	if (argc - arena.flags == 1 || argc - arena.flags > 11)
 		return (2);
-	i = 2 * arena.flags;
+	i = arena.flags;
 	while (argv[++i])
 	{
 		if (ft_n_words(argv[i], '-') != 3)

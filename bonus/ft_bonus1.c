@@ -1,18 +1,5 @@
 #include "ft_turtles.h"
 
-t_arena		ft_setarena(void)
-{
-	t_arena		arena;
-
-	arena.max_y = 30;
-	arena.max_x = 30;
-	arena.cuc_y = 15;
-	arena.cuc_x = 15;
-	arena.f = &ft_makemove;
-	arena.flags = 0;
-	return (arena);
-}
-
 t_arena		ft_set_f(t_arena arena)
 {
 	arena.f = &ft_makeonemove;
@@ -37,7 +24,9 @@ t_arena		ft_customarena(t_arena arena, char *str)
 		ft_errors(4);
 	arena.max_y = i;
 	arena.max_x = j;
-	arena.flags++;
+	arena.cuc_y = i / 2;
+	arena.cuc_x = j / 2;
+	arena.flags += 2;
 	return (arena);
 }
 
@@ -52,7 +41,7 @@ t_arena		ft_customcuc(t_arena arena, char *str)
 		ft_errors(4);
 	arena.cuc_y = ft_atoi(arr[0]);
 	arena.cuc_x = ft_atoi(arr[1]);
-	arena.flags++;
+	arena.flags += 2;
 	return (arena);
 }
 
@@ -62,15 +51,20 @@ t_turtle	*ft_makeonemove(t_turtle *trtl, t_arena arena)
 	int			i;
 	char		*com;
 
-	i = 0;
-	com = trtl->stack;
-	while (com[i])
+	if (trtl->knock == 1)
 	{
-		if (com[i] == 'l' || com[i] == 'r')
-			trtl->dir = ft_changedir(trtl->dir, com[i]);
-		if (com[i] == 'g')
-			trtl = ft_go(trtl, arena.max_y, arena.max_x);
-		i++;
+		trtl->knock = 0;
+		return (trtl);
 	}
+	i = trtl->sp;
+	com = trtl->stack;
+	if (com[i] == 'l' || com[i] == 'r')
+		trtl->dir = ft_changedir(trtl->dir, com[i]);
+	if (com[i] == 'g')
+		trtl = ft_go(trtl, arena.max_y, arena.max_x);
+	i++;
+	if (i == ft_strlen(com))
+		i = 0;
+	trtl->sp = i;
 	return (trtl);
 }
