@@ -11,11 +11,11 @@ t_arena		ft_setarena(void)
 	arena.f = &ft_makemove;
 	arena.flags = 0;
 	arena.knock = 0;
-	arena.viz = 0;
+	arena.cuc = 0;
 	return (arena);
 }
 
-void	ft_errors(int err)
+void		ft_errors(int err)
 {
 	if (err == 1)
 		return ;
@@ -34,23 +34,20 @@ void	ft_errors(int err)
 	exit(1);
 }
 
-void	ft_findwinner(t_turtle **trtl, t_arena arena)
+void		ft_findwinner(t_turtle **trtl, t_arena arena)
 {
 	int			i;
 	int			n;
 
 	n = 0;
-	while (n < MAX_MOVE)
+	while (++n <= MAX_MOVE)
 	{
-		i = 0;
-		while (trtl[i])
+		i = -1;
+		while (trtl[++i])
 		{
 			trtl[i] = arena.f(trtl[i], arena);
 			if (arena.knock)
 				ft_check_knock(trtl, i, arena);
-			//
-			if (!0)
-				printf("%s - %d:%d\n", trtl[i]->name, trtl[i]->y, trtl[i]->x);
 			if (trtl[i]->y == arena.cuc_y && trtl[i]->x == arena.cuc_x)
 			{
 				ft_putstr("The winner is ");
@@ -58,14 +55,12 @@ void	ft_findwinner(t_turtle **trtl, t_arena arena)
 				ft_putstr(".\n");
 				return ;
 			}
-			i++;
 		}
-		n++;
 	}
 	ft_putstr("Unfortunately, there is no winner:(\n");
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_turtle	**trtl;
 	t_arena		arena;
@@ -83,13 +78,9 @@ int		main(int argc, char **argv)
 			arena = ft_set_f(arena);
 		if (!ft_strcmp("-k\0", argv[i]))
 			arena = ft_set_knock(arena);
-		if (!ft_strcmp("-v\0", argv[i]))
-			arena = ft_set_viz(arena);
 	}
-	//printf("%d", arena.flags);
 	ft_errors(ft_checkargv(argc, argv, arena));
 	trtl = ft_maketurtles(argc, argv, arena.flags);
 	ft_findwinner(trtl, arena);
-
 	return (0);
 }

@@ -45,10 +45,3 @@ void		ft_check_knock(t_turtle **trtl, int i, t_arena arena)
 		k++;
 	}
 }
-
-t_arena		ft_set_viz(t_arena arena)
-{
-	arena.viz = 1;
-	arena.flags++;
-	return (arena);
-}

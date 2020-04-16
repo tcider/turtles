@@ -1,4 +1,4 @@
-NAME = turtles
+NAME = dummy_turtles
 
 SRC = *.c
 
@@ -11,5 +11,7 @@ $(NAME):
 
 clean:
 	/bin/rm -f $(NAME)
+
+fclean: clean
 
 re: clean all

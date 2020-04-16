@@ -3,10 +3,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-//
-# include <stdio.h>
-//
-# define MAX_MOVE 10
+
+# define MAX_MOVE 1000
 
 typedef struct		s_turtle
 {
@@ -28,7 +26,7 @@ typedef struct		s_arena
 	t_turtle	*(*f)(t_turtle *, struct s_arena);
 	int			flags;
 	char		knock;
-	char		viz;
+	char		cuc;
 }					t_arena;
 
 void		ft_putstr(char *str);

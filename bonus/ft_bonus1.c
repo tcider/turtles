@@ -22,10 +22,13 @@ t_arena		ft_customarena(t_arena arena, char *str)
 	j = ft_atoi(arr[1]);
 	if (i < 0 || j < 0 || i * j == 0)
 		ft_errors(4);
+	if (!arena.cuc)
+	{
+		arena.cuc_y = i / 2;
+		arena.cuc_x = j / 2;
+	}
 	arena.max_y = i;
 	arena.max_x = j;
-	arena.cuc_y = i / 2;
-	arena.cuc_x = j / 2;
 	arena.flags += 2;
 	return (arena);
 }
@@ -41,6 +44,7 @@ t_arena		ft_customcuc(t_arena arena, char *str)
 		ft_errors(4);
 	arena.cuc_y = ft_atoi(arr[0]);
 	arena.cuc_x = ft_atoi(arr[1]);
+	arena.cuc = 1;
 	arena.flags += 2;
 	return (arena);
 }
